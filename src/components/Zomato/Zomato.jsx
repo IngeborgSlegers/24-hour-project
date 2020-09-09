@@ -1,4 +1,6 @@
 import React from 'react'
+import './Zomato.css'
+import { Card, Grid, CardContent, Typography, CardActionArea } from '@material-ui/core'
 
 const Zomato = (props) => {
   const [restaurants, setRestaurants] = React.useState([])
@@ -18,22 +20,41 @@ const Zomato = (props) => {
         })
       })
         .then(res => res.json())
-        .then(json => setRestaurants(json.nearby_restaurants))
+        .then(json => {
+          console.log(json)
+          setRestaurants(json.nearby_restaurants)
+        })
         .catch(err => console.log(err))
     }
   }, [props.lat, props.long])
   return (
-    <div>
+    <Grid container>
       {
         restaurants.map((location, index) => {
           return (
-            <div className="location-card" key={index}>
-              {location.restaurant.name}
-            </div>
+            <Grid item xs={12} sm={4} key={index}>
+              <Card style={{ margin: '2.5%', backgroundColor: '#f2a2a2' }}>
+                <CardContent>
+                  <Typography variant='h5'>{location.restaurant.name}</Typography>
+                  <hr />
+                  <Grid container>
+                    <Grid item xs={6} style={{ textAlign: 'left' }}>
+                      <Typography variant='body1'>{location.restaurant.currency}{location.restaurant.average_cost_for_two} <br /> {location.restaurant.cuisines}</Typography>
+                    </Grid>
+                    <Grid item xs={6} style={{ textAlign: 'right' }}>
+                      <Typography variant="body2">rated {location.restaurant.user_rating.aggregate_rating} <br /> {location.restaurant.user_rating.votes} votes</Typography>
+                    </Grid>
+                  </Grid>
+                </CardContent>
+                <CardActionArea style={{marginBottom: '5%'}}>
+                  <Typography variant="captiontext">{location.restaurant.location.address}</Typography>
+                </CardActionArea>
+              </Card>
+            </Grid>
           )
         })
       }
-    </div>
+    </Grid>
   )
 }
 export default Zomato
