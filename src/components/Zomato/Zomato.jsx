@@ -47,7 +47,7 @@ const Zomato = (props) => {
                   </Grid>
                 </CardContent>
                 <CardActionArea style={{marginBottom: '5%'}}>
-                  <Typography variant="captiontext">{location.restaurant.location.address}</Typography>
+                  <Typography variant="caption">{location.restaurant.location.address}</Typography>
                 </CardActionArea>
               </Card>
             </Grid>
