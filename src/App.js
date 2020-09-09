@@ -3,6 +3,11 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [latitude, setLatitude] = React.useState('')
+  const [longitude, setLongitude] = React.useState('')
+  React.useEffect(() => {
+    navigator.geolocation.getCurrentPosition(location => { setLatitude(location.coords.latitude); setLongitude(location.coords.longitude) }, fail => console.log('you arent real'))
+  }, [])
   return (
     <div className="App">
       <header className="App-header">
