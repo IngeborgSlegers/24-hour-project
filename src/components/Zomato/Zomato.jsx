@@ -6,7 +6,7 @@ const Zomato = (props) => {
   React.useEffect(() => {
     console.log(props.lat, props.long)
     console.log(window.location)
-    if (props.lat !== undefined && props.long !== undefined) {
+    if (props.lat && props.long) {
       console.log('RUNNNING FETCH')
       fetch(`https://developers.zomato.com/api/v2.1/geocode?lat=${props.lat}&lon=${props.long}`, {
         method: 'GET',
