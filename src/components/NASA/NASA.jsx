@@ -1,38 +1,74 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  CardMedia,
+  Card,
+  CardActionArea,
+  Typography,
+  Box,
+} from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+
+const useStyles = makeStyles({
+  media: {
+    height: 345,
+  },
+  card: {
+    maxWidth: 345,
+    margin: "auto",
+  },
+});
 
 const NASA = (props) => {
-  const [NASA_URL, setNASA_URL] = useState('https://api.nasa.gov/planetary/earth/imagery');
-  const [key, setKey] = useState('aUYcj0GHGEp6FNA9OhPtKilnflH5WheAt9KlfozB');
-  const [NASA_Img, setNASA_Img] = useState('');
-  // console.log(NASA_Img);
+  const classes = useStyles();
+
+  const [NASA_URL, setNASA_URL] = useState(
+    "https://api.nasa.gov/planetary/earth/imagery"
+  );
+  const [key, setKey] = useState("aUYcj0GHGEp6FNA9OhPtKilnflH5WheAt9KlfozB");
+  const [NASA_Img, setNASA_Img] = useState("");
+  const [errorMessage, setErrorMessage] = useState(" ");
 
   const toInfinityAndBeyond = () => {
-    console.log('its alive');
-    console.log(props);
-    fetch(`${NASA_URL}?lon=-95.33&lat=29.78&date=2018-01-01&api_key=${key}`)
-      .then(res => {
-        console.log(res)        
-        return res.blob()
+    fetch(
+      `${NASA_URL}?lon=${props.long}&lat=${props.lat}&api_key=${key}&date=2020-09-01`
+    )
+      .then((res) => {
+        if (!res.ok) {
+          setErrorMessage("today's image is not available");
+          throw Error(res.statusText);
+        }
+        return res.blob();
       })
-      .then(nasa => {
-        console.log('this works')
-        console.log(nasa)
-        setNASA_Img(URL.createObjectURL(nasa))
+      .then((nasa) => {
+        setNASA_Img(URL.createObjectURL(nasa));
       })
-  }
+      .catch((err) => console.error(err));
+  };
 
   useEffect(() => {
     toInfinityAndBeyond();
     // return () => {
     //   cleanup
     // }
-  }, [])
+  }, [props.lat, props.long]);
 
   return (
-    <div>
-      <img src={NASA_Img} />
-    </div>
-  )
-}
+    <Box className={classes.root}>
+      {errorMessage.length !== 0 || NASA_Img.length !== 0 ? (
+        <Card className={classes.card}>
+          <CardMedia
+            className={classes.media}
+            image={NASA_Img}
+            src={NASA_Img}
+            title="no image available"
+          />
+        </Card>
+      ) : (
+        <Alert severity="error">Oops {errorMessage}</Alert>
+      )}
+    </Box>
+  );
+};
 
-export default NASA
+export default NASA;
