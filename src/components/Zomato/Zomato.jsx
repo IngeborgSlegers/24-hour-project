@@ -32,10 +32,10 @@ const Zomato = (props) => {
       {
         restaurants.map((location, index) => {
           return (
-            <Grid item xs={12} sm={4} key={index}>
-              <Card style={{ margin: '2.5%', backgroundColor: '#033a92' , color: 'white'}}>
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <Card style={{ margin: '2.5%', backgroundColor: '#033a92', color: 'white'}}>
                 <CardContent>
-                  <Typography variant='h5'>{location.restaurant.name}</Typography>
+                  <Typography variant='h5'><a className='link-color' href={location.restaurant.photos_url} target='blank'>{location.restaurant.name}</a></Typography>
                   <hr />
                   <Grid container>
                     <Grid item xs={6} style={{ textAlign: 'left' }}>
