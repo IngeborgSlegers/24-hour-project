@@ -16,7 +16,8 @@ import "./App.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%",
+    width: "90%",
+    margin: "auto"
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
