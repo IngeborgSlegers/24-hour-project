@@ -15,7 +15,6 @@ const useStyles = makeStyles({
   },
   card: {
     maxWidth: 345,
-    border: "1px black solid",
     margin: "auto",
   },
 });
@@ -56,7 +55,6 @@ const NASA = (props) => {
 
   return (
     <Box className={classes.root}>
-      <Typography variant="h4">NASA</Typography>
       {errorMessage.length !== 0 || NASA_Img.length !== 0 ? (
         <Card className={classes.card}>
           <CardMedia
