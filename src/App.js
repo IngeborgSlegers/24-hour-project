@@ -2,7 +2,6 @@ import React from "react";
 import NASA from "./components/NASA/NASA";
 import Zomato from "./components/Zomato/Zomato";
 import Weather from './components/Weather/Weather';
-
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Accordion,
@@ -50,6 +49,7 @@ function App() {
       (fail) => console.log("you arent real")
     );
   }, [latitude, longitude]);
+
 
   return (
     <div className="App">
