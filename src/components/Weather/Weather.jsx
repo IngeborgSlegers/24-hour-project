@@ -1,4 +1,12 @@
 import React, { useState, useEffect } from "react";
+import {
+
+  Grid,
+  Paper,
+  Typography,
+  Box,
+  Button,
+} from "@material-ui/core";
 
 const Weather = (props) => {
   const [fetchURL, setFetchURL] = useState(
@@ -20,7 +28,7 @@ const Weather = (props) => {
   }, [units]);
 
   const switchUnits = () => {
-    if (units === "metric"){
+    if (units === "metric") {
       setUnits("imperial");
     } else {
       setUnits("metric");
@@ -28,23 +36,41 @@ const Weather = (props) => {
   }
 
   return (
-    <div>
+    <Grid container>
+      <Grid item xs={12} sm={4}></Grid>
       {weather && units === "metric" ? (
-        <div>
-          <h1>{weather.main.temp}&#8451;</h1>
-          <h1>High: {weather.main.temp_max}&#8451;</h1>
-          <h1>Low: {weather.main.temp_min}&#8451;</h1>
-          <button onClick={switchUnits}>Switch Units</button>
-        </div>
+        <Grid item xs={4}>
+          <Paper>
+            <Grid container>
+              <Grid item xs={6}>
+                <Typography variant="h3">{Math.floor(weather.main.temp)}&#8451;</Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant="body1">High: {Math.floor(weather.main.temp_max)}&#8451;</Typography>
+                <Typography variant="body1">Low: {Math.floor(weather.main.temp_min)}&#8451;</Typography>
+              </Grid>
+            </Grid>
+            <Button onClick={switchUnits}>Switch Units</Button>
+          </Paper>
+        </Grid>
       ) : weather && units === "imperial" ? (
-        <div>
-          <h1>{weather.main.temp}&#8451;</h1>
-          <h1>High: {weather.main.temp_max}&#8451;</h1>
-          <h1>Low: {weather.main.temp_min}&#8451;</h1>
-          <button onClick={switchUnits}>Switch Units</button>
-        </div>
-      ) : <h1>Loading...</h1>}
-    </div>
+        <Grid item xs={12} sm={4}>
+          <Paper>
+            <Grid container>
+              <Grid item xs={6}>
+                <Typography variant="h3">{Math.floor(weather.main.temp)}&#8457;</Typography>
+              </Grid>
+              <Grid item xs={6}>
+                <Typography variant='body1'>High: {Math.floor(weather.main.temp_max)}&#8457;</Typography>
+                <Typography variant='body1'>Low: {Math.floor(weather.main.temp_min)}&#8457;</Typography>
+              </Grid>
+            </Grid>
+            <Button onClick={switchUnits}>Switch Units</Button>
+          </Paper>
+        </Grid>
+      ) : <Typography variant="h1">Loading...</Typography>}
+      <Grid item xs={12} sm={4}></Grid>
+    </Grid>
   );
 };
 
