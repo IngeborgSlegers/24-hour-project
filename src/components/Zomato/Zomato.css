@@ -1,7 +1,9 @@
-.location-card {
-  background-color: rgba(75, 213, 255, 0.609);
-  margin: 5%;
-  border-radius: 5px;
-  padding: 2.5%;
-  padding-top: .5%;
+.link-color {
+  color: white;
+  text-decoration: none;
+}
+
+.link-color:hover {
+  color: lightcoral;
+  text-decoration: underline;
 }
