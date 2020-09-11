@@ -7,6 +7,10 @@ const Weather = (props) => {
   const [weather, setWeather] = useState(undefined);
   const apiKey = "40f89b7a717e3d03adafe2918d6d4bc2";
 
+  const weatherToggle = () => {
+    
+  }
+
   useEffect(() => {
     const fetchWeather = async () => {
       const response = await fetch(
