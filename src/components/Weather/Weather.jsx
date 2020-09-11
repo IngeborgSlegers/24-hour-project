@@ -16,10 +16,6 @@ const Weather = (props) => {
   const [units, setUnits] = useState("imperial");
   const apiKey = "40f89b7a717e3d03adafe2918d6d4bc2";
 
-  const weatherToggle = () => {
-    
-  }
-
   useEffect(() => {
     const fetchWeather = async () => {
       const response = await fetch(
