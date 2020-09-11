@@ -3,8 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   CardMedia,
   Card,
-  CardActionArea,
-  Typography,
+  CircularProgress,
   Box,
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
@@ -75,6 +74,8 @@ const NASA = (props) => {
             title="no image available"
           />
         </Card>
+      ) : NASA_Img.length === 0 ? (
+        <CircularProgress />
       ) : (
         <Alert severity="error">Oops! {errorMessage}</Alert>
       )}
